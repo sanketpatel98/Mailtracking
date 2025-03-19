@@ -11,6 +11,10 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); // Parse incoming JSON requests
 
+app.get("/", (req, res) => {
+    res.send("Hello from Express on Vercel!");
+  });
+  
 // Use tracking routes
 app.use('/api', trackingRoutes);
 
