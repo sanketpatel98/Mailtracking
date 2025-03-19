@@ -6,7 +6,7 @@ import fs from 'fs';
 export const trackPixel = async (req, res) => {
     const logEntry = {
         timestamp: new Date().toISOString(),
-        ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress,
+        ip: req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress,
         userAgent: req.headers['user-agent'],
         referrer: req.headers['referer'] || 'Direct',
     };
