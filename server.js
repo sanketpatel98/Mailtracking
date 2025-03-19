@@ -6,9 +6,9 @@ import cors from "cors";
 dotenv.config(); // Load environment variables from .env file
 console.log("MongoDB URI:", process.env.MONGODB_URI); // Debugging
 
-app.use(cors());
 
 const app = express();
+app.use(cors());
 app.set('trust proxy', true)
 const PORT = process.env.PORT || 3000;
 
