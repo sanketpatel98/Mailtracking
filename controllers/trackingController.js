@@ -4,9 +4,10 @@ import fs from 'fs';
 
 // Handle tracking pixel requests (log the open)
 export const trackPixel = async (req, res) => {
+    
     const logEntry = {
         timestamp: new Date().toISOString(),
-        ip: req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress,
+        ip: req.ip,
         userAgent: req.headers['user-agent'],
         referrer: req.headers['referer'] || 'Direct',
     };
