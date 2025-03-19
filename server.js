@@ -1,9 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import trackingRoutes from './routes/trackingRoutes.js';
+import cors from "cors";
 
 dotenv.config(); // Load environment variables from .env file
 console.log("MongoDB URI:", process.env.MONGODB_URI); // Debugging
+
+app.use(cors());
 
 const app = express();
 app.set('trust proxy', true)
