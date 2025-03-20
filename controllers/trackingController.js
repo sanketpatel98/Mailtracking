@@ -27,6 +27,9 @@ export const trackPixel = async (req, res) => {
       "base64"
     );
 
+    res.setHeader("Access-Control-Allow-Origin", "*"); // Or specify your domain
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     res.setHeader("Content-Type", "image/png");
     res.setHeader(
       "Cache-Control",
