@@ -4,9 +4,9 @@ import { trackPixel, getLogs } from '../controllers/trackingController.js';
 const router = express.Router();
 
 // Route to serve the tracking pixel
-router.get('/track.png', trackPixel);
+router.get('/track.png/:id', trackPixel);
 
 // Route to get tracking logs
-router.get('/logs', getLogs);
+router.get('/logs/:id', getLogs);
 
 export default router;
