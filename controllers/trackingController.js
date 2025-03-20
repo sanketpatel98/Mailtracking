@@ -7,6 +7,11 @@ import {
 // Handle tracking pixel requests (log the open)
 export const trackPixel = async (req, res) => {
   try {
+    if (req.method === "OPTIONS") {
+      res.writeHead(204);
+      res.end();
+      return;
+    }
     const id = req.params.id;
     const clientIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
