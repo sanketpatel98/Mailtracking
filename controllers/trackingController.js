@@ -27,10 +27,13 @@ export const trackPixel = async (req, res) => {
     await logTrackingData(logEntry);
 
     // Serve a 1x1 transparent pixel from memory
-    const transparentPixel = Buffer.from(
-      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/KhFtgAAAABJRU5ErkJggg==",
-      "base64"
-    );
+    // const transparentPixel = Buffer.from(
+    //   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/KhFtgAAAABJRU5ErkJggg==",
+    //   "base64"
+    // );
+
+    const transparentPixel = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAMgAAAAyCAIAAACWMwO2AAABW0lEQVR4nO3b0Q6CIBhAYWm9/yvTBZsjfzQqzxR2vivXVGicETelnPMine1x9QQ0J8MSwrCEMCwhDEsIwxLCsIQwLCEMSwjDEsKwhDAsIQxLCMMSwrCEMCwhDEsIwxLCsIQwLCGeV0/gAimlcvHxjyTlzv//b/LxPeuUThnuDmYI69tVyTnXj5wybufQe8qzp8zqJoYPq94M1oWp96T1hua20Xy8+bbYzeblKaX+9/TvmoOa5IwV13W9jhf1U8v7SsfrctG//D3vaRY2meHDqlf9hwVrbmDfqsftH33WpIoZfgpLW/EXp3N167b2dqbj03f9+fHo8x3S96TRv15cqnimjsesuPybFDa74NLq4Pj+vVnFSTYrHH5dRv8Cuqfhz1i6J8MSwrCEMCwhDEsIwxLCsIQwLCEMSwjDEsKwhDAsIQxLCMMSwrCEMCwhDEsIwxLCsIQwLCEMS4gX88zGZzWYC6YAAAAASUVORK5CYII=", "base64");
+
 
     res.setHeader("Access-Control-Allow-Origin", "*"); // Or specify your domain
     res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
