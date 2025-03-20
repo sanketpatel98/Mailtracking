@@ -4,7 +4,9 @@ export const logTrackingData = async (logData) => {
   const db = await connectDb();
   const logsCollection = db.collection("logs");
 
-  const userExists = await logsCollection.find({ user: logData.user }).count();
+  const userExists = await logsCollection.countDocuments({
+    user: logData.user,
+  });
 
   if (userExists) {
     await logsCollection.updateOne(
