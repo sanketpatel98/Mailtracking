@@ -3,8 +3,8 @@ import { createUser, removeUser } from '../controllers/userController.js';
 
 const router = express.Router();
 
-router.post('/', createUser)
+router.post('/create', createUser)
 
-router.delete('/:id', removeUser);
+router.delete('/delete/:id', removeUser);
 
 export default router;
