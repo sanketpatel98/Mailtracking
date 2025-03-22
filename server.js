@@ -28,6 +28,3 @@ app.use('/user', userRoutes);
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
-
-
-// Continue making one API that can be used to track email opens. This API should be able to track user info ie. username + token. Also, save them in database to retrive later.
