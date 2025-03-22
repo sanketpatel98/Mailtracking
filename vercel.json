@@ -11,7 +11,14 @@
             "src": "/api/(.*)",
             "dest": "/server.js",
             "headers": {
-                "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*"
+            }
+        },
+        {
+            "src": "/user/(.*)",
+            "dest": "/server.js",
+            "headers": {
+            "Access-Control-Allow-Origin": "*"
             }
         }
     ]
