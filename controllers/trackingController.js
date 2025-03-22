@@ -14,18 +14,14 @@ export const trackPixel = async (req, res) => {
       return;
     }
     const id = req.params.id;
-    const clientIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-
-    const logEntry = {
-      timestamp: new Date().toISOString(),
-      lastOpenedTimeStamp: new Date().toISOString(),
-      ip: clientIP,
-      user: id || "Unknown",
-      count: 0,
-    };
 
     // Save log data to MongoDB
-    await logTrackingData(logEntry);
+    try {
+      await logTrackingData(id);
+    } catch (error) {
+      console.error("Error logging tracking data:", error);
+      return res.status(500).json({ message: "Error logging tracking data" });
+    }
 
     const transparentPixel = Buffer.from(
       "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVR42mNk+P+/ngEIGGEMADVuBP1gxwDKAAAAAElFTkSuQmCC+AD9hNnAAAAAElFTkSuQmCC",

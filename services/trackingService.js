@@ -1,16 +1,16 @@
 import { connectDb } from "../database/database.js";
 
-export const logTrackingData = async (logData) => {
+export const logTrackingData = async (token) => {
   const db = await connectDb();
   const logsCollection = db.collection("logs");
 
   const userExists = await logsCollection.countDocuments({
-    user: logData.user,
+    user: token,
   });
 
   if (userExists) {
     await logsCollection.updateOne(
-      { user: logData.user },
+      { user: token },
       {
         $inc: { count: 1 },
         $set: { lastOpenedTimeStamp: new Date().toISOString() },
@@ -18,7 +18,7 @@ export const logTrackingData = async (logData) => {
     );
     return;
   }
-  await logsCollection.insertOne(logData);
+  throw new Error("User does not exist");
 };
 
 export const getTrackingLogs = async (userId) => {
