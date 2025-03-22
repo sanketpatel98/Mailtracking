@@ -26,3 +26,9 @@ export const getTrackingLogs = async (userId) => {
   const logsCollection = db.collection("logs");
   return await logsCollection.find({ user: userId }).toArray();
 };
+
+export const deleteTrackingLogs = async (userId) => {
+  const db = await connectDb();
+  const logsCollection = db.collection("logs");
+  return await logsCollection.deleteOne({ user: userId });
+}

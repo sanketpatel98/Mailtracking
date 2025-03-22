@@ -2,6 +2,7 @@ import path from "path";
 import {
   getTrackingLogs,
   logTrackingData,
+  deleteTrackingLogs,
 } from "../services/trackingService.js";
 
 // Handle tracking pixel requests (log the open)
@@ -25,12 +26,6 @@ export const trackPixel = async (req, res) => {
 
     // Save log data to MongoDB
     await logTrackingData(logEntry);
-
-    // Serve a 1x1 transparent pixel from memory
-    // const transparentPixel = Buffer.from(
-    //   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/KhFtgAAAABJRU5ErkJggg==",
-    //   "base64"
-    // );
 
     const transparentPixel = Buffer.from(
       "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAEklEQVR42mNk+P+/ngEIGGEMADVuBP1gxwDKAAAAAElFTkSuQmCC+AD9hNnAAAAAElFTkSuQmCC",
@@ -61,5 +56,17 @@ export const getLogs = async (req, res) => {
   } catch (error) {
     console.error("Error retrieving logs:", error);
     res.status(500).json({ message: "Error retrieving logs" });
+  }
+};
+
+// Delete tracking logs
+export const deleteLogs = async (req, res) => {
+  try {
+    const user = req.params.id;
+    await deleteTrackingLogs(user);
+    res.json({ message: "Logs deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting logs:", error);
+    res.status(500).json({ message: "Error deleting logs" });
   }
 };
