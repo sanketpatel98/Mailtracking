@@ -18,7 +18,8 @@ export const trackPixel = async (req, res) => {
 
     // Save log data to MongoDB
     try {
-      await logTrackingData(code);
+      const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      await logTrackingData(code, userIp);
     } catch (error) {
       console.error("Error logging tracking data:", error);
       return res.status(500).json({ message: "Error logging tracking data" });

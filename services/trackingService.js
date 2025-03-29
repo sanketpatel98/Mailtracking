@@ -1,15 +1,16 @@
 import { connectDb } from "../database/database.js";
 import crypto from "crypto";
 
-export const logTrackingData = async (code) => {
+export const logTrackingData = async (code, ip) => {
   const db = await connectDb();
   const logsCollection = db.collection("logs");
 
-  const userExists = await logsCollection.countDocuments({
-    code: code,
-  });
+  const userExists = await logsCollection.findOne({ code: code });
 
   if (userExists) {
+    if (userExists.ip === ip) {
+      return;
+    }
     await logsCollection.updateOne(
       { code: code },
       {
