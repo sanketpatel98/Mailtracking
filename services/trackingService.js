@@ -1,5 +1,6 @@
 import { connectDb } from "../database/database.js";
 import crypto from "crypto";
+import { addTempIPLog } from "./databaseTempLogs.js";
 
 export const logTrackingData = async (code, ip) => {
   const db = await connectDb();
@@ -11,6 +12,7 @@ export const logTrackingData = async (code, ip) => {
     if (userExists.ip === ip) {
       return;
     }
+    addTempIPLog(ip);
     await logsCollection.updateOne(
       { code: code },
       {
